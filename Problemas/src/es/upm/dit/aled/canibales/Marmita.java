@@ -1,7 +1,7 @@
 package es.upm.dit.aled.canibales;
 
 /**
- * Marmita - monitor para gestionar el uso de la marmita por parte del coniero y
+ * Marmita - monitor para gestionar el uso de la marmita por parte del cocinero y
  * los caníbales
  * 
  * @author aalonso
