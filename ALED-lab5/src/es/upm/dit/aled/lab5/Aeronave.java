@@ -54,6 +54,12 @@ public class Aeronave implements Runnable {
 			Thread.sleep (TIEMPO_DESPEGUE); 
 			pista.despega(id);
 			System.out.println("----- " + id + " ha despegado");
+			// tarda un tiempo en acabar las turbulencias
+			switch (tipo) {
+			 	case AVION    : Thread.sleep(2000);
+			 	case AVIONETA : Thread.sleep(1000);
+			}
+			pista.finTurbulencias();
 		} catch (Exception e) {
 			System.err.println(">>>>> error: " + e.getMessage());
 		}
