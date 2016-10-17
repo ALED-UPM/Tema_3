@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Emite un sonido cuando se pulsa la tecla "intro"
  * 
  * @author jpuente
- * @verion 20130924
+ * @verion 20161017
  */
 public class Sonido extends Thread {
 
@@ -17,6 +17,7 @@ public class Sonido extends Thread {
 		while(true) {
 			sc.nextLine();                       /* espera fin de línea */
 			Toolkit.getDefaultToolkit().beep();  /* emite sonido */
+			System.out.print("beep");
 		}
 	}
 

@@ -1,7 +1,3 @@
-
-
-
-
 package es.upm.dit.aled.hebras;
 
 /**
@@ -9,7 +5,7 @@ package es.upm.dit.aled.hebras;
  * y produce un sonido cuando se pulsa INTRO
  * 
  * @author jpuente
- * @version 24.09.2013
+ * @version 2016.10.17
  */
 public class Reloj {
 
