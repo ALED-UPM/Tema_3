@@ -7,6 +7,10 @@ package es.upm.dit.aled.mutex;
  * @author jpuente
  * @version 15.10.2014
  */
+/**
+ * @author jpuente
+ *
+ */
 public class PruebaContador {
 	
 	static final long nVeces = 1000000;
