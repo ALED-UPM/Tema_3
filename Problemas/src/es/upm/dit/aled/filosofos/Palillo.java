@@ -33,7 +33,7 @@ public class Palillo {
 	 * 
 	 * @throws InterruptedException
 	 */
-	public synchronized void deja() throws InterruptedException {
+	public synchronized void deja() {
 		ocupado = false;
 		System.out.println("Palillo " + id + " libre");
 		notifyAll();

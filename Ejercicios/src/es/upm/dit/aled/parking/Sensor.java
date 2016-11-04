@@ -22,7 +22,7 @@ public class Sensor extends Thread {
 	 * 
 	 * @param p  Parking
 	 * @param acceso Tipo de acceso (ENTRADA, SALIDA)
-	 * @param id Nombre del sensor (por ejmplo, "Norte", etc.)
+	 * @param id Nombre del sensor (por ejemplo, "Norte", etc.)
 	 */
 	public Sensor(Parking p, Acceso acceso, String id) {
 		this.p = p;

@@ -37,20 +37,23 @@ public class Filosofo extends Thread {
 		while (true) {
 			try {
 				System.out.println(id + " piensa");
-				Thread.sleep(random.nextInt(5000));
-				if (id%4 == 0) {
-					System.out.println(id + " coge el palillo " + id);
-					izquierdo.toma();
-					Thread.sleep(1000); // para facilitar el interbloqueo
-					System.out.println(id + " coge el palillo " + ((id + 1) % 5));
-					derecho.toma();
-				} else {
-					System.out.println(id + " coge el palillo " + ((id + 1) % 5));
-					derecho.toma();
-					Thread.sleep(1000); // para facilitar el interbloqueo			
-					System.out.println(id + " coge el palillo " + id);
-					izquierdo.toma();
-				}
+				Thread.sleep(random.nextInt(1000));
+				izquierdo.toma();
+				Thread.sleep(random.nextInt(1000));
+				derecho.toma();
+//				if (id%4 == 0) {
+//					System.out.println(id + " coge el palillo " + id);
+//					izquierdo.toma();
+//					Thread.sleep(1000); // para facilitar el interbloqueo
+//					System.out.println(id + " coge el palillo " + ((id + 1) % 5));
+//					derecho.toma();
+//				} else {
+//					System.out.println(id + " coge el palillo " + ((id + 1) % 5));
+//					derecho.toma();
+//					Thread.sleep(1000); // para facilitar el interbloqueo			
+//					System.out.println(id + " coge el palillo " + id);
+//					izquierdo.toma();
+//				}
 				System.out.println(id + " come");
 				Thread.sleep(random.nextInt(2000));
 				System.out.println(id + " deja el palillo " + ((id + 1) % 5));

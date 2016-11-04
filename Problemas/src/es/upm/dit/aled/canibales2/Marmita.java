@@ -28,25 +28,31 @@ public class Marmita {
 		} catch (InterruptedException ie) {
 			return;
 		}
-
+		// vacio == false // invariante
 		if (n == 0) {
 			System.out.println("El canibal " + id + " avisa al cocinero");
 			vacio = true;
 			notifyAll();
 			try {
+				// n == 0 && vacio == true
 				while (n == 0)
 					wait();
 			} catch (InterruptedException ie) {
 				return;
 			}
+			// n > 0
 			vacio = false;
 			n--;
 			System.out.println("Come canibal " + id + " " + n);
+			// n >= 0 && vacio == false
 			notifyAll();
 		} else {
+			// n > 0
 			n--;
+			// n >= 0 && vacio == false
 			System.out.println("Come canibal " + id + " " + n);
 		}
+		// n >= 0 && vacio == false
 	}
 
 	public synchronized void rellenar() {
@@ -57,6 +63,7 @@ public class Marmita {
 			// Se añade NRaciones == 0 para asegurar que el
 			// cocinero no se adelante al caníbal si se da mucha
 			// prisa y la gestión de las colas lo permite.
+			
 			while (!vacio || n > 0)
 				wait();
 		} catch (InterruptedException ie) {

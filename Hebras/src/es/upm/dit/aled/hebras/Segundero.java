@@ -22,7 +22,7 @@ public class Segundero extends Thread {
 			System.err.println("Hebra interrumpida");
 			return; // La hebra ha sido desbloqueada mediante la
 		} // invocación de interrupt
-		System.out.println("Terminado sin interrupci√≥n");
+		System.out.println("Terminado sin interrupción");
 	}
 
 	public void detener() {
