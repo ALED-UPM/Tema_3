@@ -28,5 +28,13 @@ public class Pista {
 	public void despega(long vuelo) {
 		System.out.println("----- " + vuelo + " despega");
 	}
+	
+	/**
+	 * Las aeronaves invovan este método para indicar que han 
+	 * terminado las turbulencias
+	 */
+	public synchronized void finTurbulencias() {
+		System.out.println("----- " +"fin de turbulencias");
+	}
 
 }
