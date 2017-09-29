@@ -20,6 +20,7 @@ public class Aeronave implements Runnable {
 	 * Tiempo de despegue fijo para todas las aeronaves
 	 */
 	private final long TIEMPO_DESPEGUE = 2000;        // 2 minutos
+	private final long TIEMPO_TURBULENCIAS;
 
 	/**
 	 * Constructor
@@ -35,6 +36,11 @@ public class Aeronave implements Runnable {
 		this.id = id;
 		this.tipo = tipo;
 		this.pista = pista;
+		if (tipo == Tipo.AVION) {
+			TIEMPO_TURBULENCIAS = 2000;
+		} else {
+			TIEMPO_TURBULENCIAS = 1000;
+		}
 	}
 
 	public void run() {
@@ -48,6 +54,9 @@ public class Aeronave implements Runnable {
 			Thread.sleep (TIEMPO_DESPEGUE); 
 			pista.despega(id);
 			System.out.println("----- " + id + " ha despegado");
+			Thread.sleep (TIEMPO_TURBULENCIAS); 
+			pista.finTurbulencias();
+			System.out.println("----- " + id + " fin de turbulencias");
 		} catch (Exception e) {
 			System.err.println(">>>>> error: " + e.getMessage());
 		}
