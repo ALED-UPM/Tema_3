@@ -13,9 +13,9 @@ public class PruebaLE {
 
 		final int nLectores = 10;
 		final int nEscritores = 8;
-//		Gestor gestor = new GestorLE();
+		Gestor gestor = new GestorLE();
 //		Gestor gestor = new GestorLEPrioridadEscritores();
-		Gestor gestor = new GestorLEEquitativo();
+//		Gestor gestor = new GestorLEEquitativo();
 		Lector[] lector = new Lector[nLectores];
 		Escritor[] escritor = new Escritor[nEscritores];
 

@@ -15,16 +15,20 @@ public class GestorLE implements Gestor {
 	private boolean bloqueoLector = false;
 	private int nLectores = 0;
 
-	public synchronized void empiezaLeer(int idLector)
-			throws InterruptedException {
+	public synchronized void empiezaLeer(int idLector) {
 
 		if (bloqueoEscritor)
 			System.out.println("LLLLL La hebra lectora " + idLector
 					+ " se ha bloqueado");
 
 		while (bloqueoEscritor) {
-			wait();
+			try {
+				wait();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+
 		bloqueoLector = true;
 		nLectores++;
 
@@ -32,21 +36,25 @@ public class GestorLE implements Gestor {
 				+ " tiene permiso para leer");
 	}
 
-	public synchronized void empiezaEscribir(int idEscritor)
-			throws InterruptedException {
+    public synchronized void empiezaEscribir(int idEscritor) {
 
-		if (bloqueoEscritor || bloqueoLector)
-			System.out.println("EEEEE La hebra escritora " + idEscritor
-					+ " se ha bloqueado");
+        if (bloqueoEscritor || bloqueoLector)
+            System.out.println("EEEEE La hebra escritora " + idEscritor
+                    + " se ha bloqueado");
 
-		while (bloqueoEscritor || bloqueoLector) {
-			wait();
-		}
-		bloqueoEscritor = true;
+        while (bloqueoEscritor || bloqueoLector) {
+            try {
+                wait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-		System.out.println("E>>>> La hebra escritora " + idEscritor
-				+ " tiene permiso para escribir");
-	}
+        bloqueoEscritor = true;
+
+        System.out.println("E>>>> La hebra escritora " + idEscritor
+                + " tiene permiso para escribir");
+    }
 
 	public synchronized void terminaLeer(int idLector) {
 		System.out.println("L<<<< La hebra lectora " + idLector

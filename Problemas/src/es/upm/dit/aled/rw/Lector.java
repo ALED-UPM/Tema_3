@@ -23,9 +23,9 @@ public class Lector extends Thread {
 	public void run() {
 		try {
 			while (true) {
-				Thread.sleep(random.nextInt(1000));
+				sleep(random.nextInt(1000));
 				gestor.empiezaLeer(id);
-				Thread.sleep(random.nextInt(1500));
+				sleep(random.nextInt(1500));
 				gestor.terminaLeer(id);
 			}
 		} catch (InterruptedException ie) {

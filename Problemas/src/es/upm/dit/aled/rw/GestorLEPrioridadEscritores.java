@@ -17,16 +17,20 @@ public class GestorLEPrioridadEscritores implements Gestor {
 	private int nEscritoresEsperando = 0;
 	private int nLectores = 0;
 
-	public synchronized void empiezaLeer(int idLector)
-			throws InterruptedException {
+	public synchronized void empiezaLeer(int idLector) {
 
 		if (bloqueoEscritor || nEscritoresEsperando > 0)
 			System.out.println("LLLLL La hebra lectora " + idLector
 					+ " se ha bloqueado");
 
 		while (bloqueoEscritor || nEscritoresEsperando > 0) {
-			wait();
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
+
 		bloqueoLector = true;
 		nLectores++;
 
@@ -35,8 +39,7 @@ public class GestorLEPrioridadEscritores implements Gestor {
 
 	}
 
-	public synchronized void empiezaEscribir(int idEscritor)
-			throws InterruptedException {
+	public synchronized void empiezaEscribir(int idEscritor) {
 
 		if (bloqueoEscritor || bloqueoLector)
 			System.out.println("EEEEE La hebra escritora " + idEscritor
@@ -44,8 +47,12 @@ public class GestorLEPrioridadEscritores implements Gestor {
 
 		nEscritoresEsperando++;
 		while (bloqueoEscritor || bloqueoLector) {
-			wait();
-		}
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 		nEscritoresEsperando--;
 		bloqueoEscritor = true;
 

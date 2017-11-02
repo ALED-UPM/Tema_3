@@ -14,7 +14,7 @@ public interface Gestor {
 	/**
 	 * Método que invoca una hebra lectora antes de comenzar a leer
 	 */
-	public void empiezaLeer (int idLector) throws InterruptedException;
+	public void empiezaLeer (int idLector);
 
 	/**
 	 * Método que invoca una hebra lectora al terminar de leer
@@ -24,7 +24,7 @@ public interface Gestor {
 	/**
 	 * Método que invoca una hebra escritora antes de comenzar a escribir
 	 */
-	public void empiezaEscribir (int idEscritor) throws InterruptedException;
+	public void empiezaEscribir (int idEscritor);
 
 	/**
 	 * Método que invoca una hebra lectora al terminar de escribir

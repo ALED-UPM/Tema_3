@@ -17,8 +17,7 @@ public class GestorLEEquitativo implements Gestor {
 	private boolean turnoEscritor = true;
 	private int nLectores = 0;
 
-	public synchronized void empiezaLeer(int idLector)
-			throws InterruptedException {
+	public synchronized void empiezaLeer(int idLector) {
 
 		if (bloqueoEscritor || (nEscritoresEsperando > 0 && turnoEscritor))
 			System.out.println("LLLLL La hebra lectora " + idLector
@@ -26,7 +25,11 @@ public class GestorLEEquitativo implements Gestor {
 
 		nLectoresEsperando++;
 		while (bloqueoEscritor || (nEscritoresEsperando > 0 && turnoEscritor)) {
-			wait();
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		nLectoresEsperando--;
 		bloqueoLector = true;
@@ -37,8 +40,7 @@ public class GestorLEEquitativo implements Gestor {
 				+ " tiene permiso para leer");
 	}
 
-	public synchronized void empiezaEscribir(int idEscritor)
-			throws InterruptedException {
+	public synchronized void empiezaEscribir(int idEscritor) {
 
 		if (bloqueoEscritor || bloqueoLector
 				|| (nLectoresEsperando > 0 && !turnoEscritor))
@@ -48,7 +50,11 @@ public class GestorLEEquitativo implements Gestor {
 		nEscritoresEsperando++;
 		while (bloqueoEscritor || bloqueoLector
 				|| (nLectoresEsperando > 0 && !turnoEscritor)) {
-			wait();
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		nEscritoresEsperando--;
 		bloqueoEscritor = true;
