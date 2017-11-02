@@ -12,7 +12,6 @@ public class Segundero extends Thread {
 
 	public void run() {
 		int segundos = 0;
-		try {
 			while (activo) {
 				sleep(1000); // La hebra se bloquea un segundo
 				segundos++;

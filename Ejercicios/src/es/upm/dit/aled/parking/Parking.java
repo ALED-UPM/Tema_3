@@ -20,11 +20,17 @@ public class Parking {
 		} catch (InterruptedException e) {
 		}
 		n++;
+		System.out.println("entra...n = " + n);
+		notify();
 	}
 
 	// sale un coche por una de las puertas
 	public synchronized void sale (String puerta) {
+		try {
+			while (n <= 0) wait();
+		} catch (Exception e) {}
 		n--;
+		System.out.println("sale...n = " + n);
 		notify();
 	}
 	
