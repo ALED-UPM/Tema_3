@@ -57,10 +57,10 @@ public class Marmita {
 
 	public synchronized void rellenar() {
 		try {
-			// No se deja sólo NRaciones > 0 para que sólo
+			// No se deja sólo n > 0 para que sólo
 			// se rellene la marmita cuando un caníbal se
 			// da cuenta de que está vacia
-			// Se añade NRaciones == 0 para asegurar que el
+			// Se añade n == 0 para asegurar que el
 			// cocinero no se adelante al caníbal si se da mucha
 			// prisa y la gestión de las colas lo permite.
 			
