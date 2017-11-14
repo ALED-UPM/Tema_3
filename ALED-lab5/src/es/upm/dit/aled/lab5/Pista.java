@@ -4,7 +4,7 @@ package es.upm.dit.aled.lab5;
  * Pista de despegue
  * 
  * @author jpuente
- * @version 2016.11.10
+ * @version 2017.11.14
  */
 public class Pista {
 
@@ -13,8 +13,8 @@ public class Pista {
 	 * Debe modificarse el código de forma que la aeronave espere si
 	 * no se cumplen las condiciones para el despegue.
 	 * 
-	 * @param vuelo
-	 * @param tipo 
+	 * @param vuelo número de vuelo
+	 * @param tipo  tipo de aeronave
 	 */
 	public void entra(long vuelo, Tipo tipo) {
 		System.out.println("----- " + vuelo + " " + tipo + " entra en pista");
@@ -23,7 +23,7 @@ public class Pista {
 	/**
 	 * Las aeronaves invocan este método cuando despegan.
 	 * 
-	 * @param vuelo
+	 * @param vuelo número de vuelo
 	 */	
 	public void despega(long vuelo) {
 		System.out.println("----- " + vuelo + " despega");

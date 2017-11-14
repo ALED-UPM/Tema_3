@@ -6,7 +6,7 @@ import java.util.Random;
  * Aeronave - puede ser avión o avioneta
  * 
  * @author jpuente
- * @version 06.11.2014
+ * @version 2017.11.14
  */
 public class Aeronave implements Runnable {
 

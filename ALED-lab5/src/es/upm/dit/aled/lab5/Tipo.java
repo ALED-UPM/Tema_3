@@ -4,7 +4,7 @@ package es.upm.dit.aled.lab5;
  * Tipo de aeronave
  * 
  * @author jpuente
- * @version 06.11.2014
+ * @version 2017.11.14
  */
 public enum Tipo {
 	AVION, AVIONETA;
