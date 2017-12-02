@@ -2,39 +2,95 @@ package es.upm.dit.aled.lab5;
 
 /**
  * Pista de despegue
- * 
+ *
+ * Se han añadido aserciones para comprobar que todo funciona correctamente
+ * (https://docs.oracle.com/javase/8/docs/technotes/guides/language/assert.html)
+ * y se ha separado la espera para entrar en pista de la espera por turbulencias
+ * para un mayor realismo.
+ *
  * @author jpuente
- * @version 2017.11.14
+ * @version 04.12.2017
  */
 public class Pista {
 
-	/**
-	 * Las aeronaves invocan este método cuando llegan a la pista.
-	 * Debe modificarse el código de forma que la aeronave espere si
-	 * no se cumplen las condiciones para el despegue.
-	 * 
-	 * @param vuelo número de vuelo
-	 * @param tipo  tipo de aeronave
-	 */
-	public void entra(long vuelo, Tipo tipo) {
-		System.out.println("----- " + vuelo + " " + tipo + " entra en pista");
-	}
 
-	/**
-	 * Las aeronaves invocan este método cuando despegan.
-	 * 
-	 * @param vuelo número de vuelo
-	 */	
-	public void despega(long vuelo) {
-		System.out.println("----- " + vuelo + " despega");
-	}
-	
-	/**
-	 * Las aeronaves invovan este método para indicar que han 
-	 * terminado las turbulencias
-	 */
-	public void finTurbulencias() {
-		System.out.println("----- " +"fin de turbulencias");
-	}
+    /**
+     * Pista ocupada
+     */
+    private boolean ocupada = false;
+
+    /**
+     * Turbulencias
+     */
+    private boolean turbulencias = false;
+
+    /**
+     * Tipo de la última aeronave que ha despegado
+     */
+    private Tipo ultimo = null;
+
+    /**
+     * Número de aviones esperando entrar en pista
+     */
+    private int avionesEsperando = 0;
+
+    /**
+     * Las aeronaves invocan este método cuando llegan a la pista.
+     *
+     * @param vuelo
+     * @param tipo
+     */
+    public synchronized void entra(long vuelo, Tipo tipo) {
+        try {
+            if (tipo == Tipo.AVION) {
+                avionesEsperando++;
+            }
+            while (ocupada || (tipo == Tipo.AVIONETA && ultimo == Tipo.AVIONETA && avionesEsperando > 0)) {
+                wait();
+            }
+            ocupada = true;
+
+            System.out.println("····· vuelo " + vuelo + " pasa a pista");
+            assert ocupada && (tipo == Tipo.AVION ||
+                    (tipo == Tipo.AVIONETA && (ultimo == Tipo.AVION || avionesEsperando == 0)))
+                    : " avioneta " + vuelo + " pasando incorrectamente";
+
+            if (tipo == Tipo.AVION)
+                avionesEsperando--;
+            ultimo = tipo;
+
+            // ahora espera que no haya turbulencias (pero ya dentro de la pista)
+            while (turbulencias) {
+                wait();
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        assert ocupada && !turbulencias : "vuelo " + vuelo + " entrando incorrectamente";
+        System.out.println("----- " + vuelo + " " + tipo + " comienza despegue");
+    }
+
+    /**
+     * Las aeronaves invocan este método cuando despegan.
+     *
+     * @param vuelo
+     */
+    public synchronized void despega(long vuelo) {
+        ocupada = false;
+        turbulencias = true;
+        notifyAll();
+        System.out.println("----- " + vuelo + " despega");
+    }
+
+    /**
+     * Las aeronaves invovan este método para indicar que han
+     * terminado las turbulencias
+     */
+    public synchronized void finTurbulencias() {
+        turbulencias = false;
+        notifyAll();
+        System.out.println("----- " + "fin de turbulencias");
+    }
 
 }
